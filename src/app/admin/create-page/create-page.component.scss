@@ -1,0 +1,33 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-text);
+  padding: 5px;
+}
+.input-group-text {
+  color: var(--color-text);
+  min-width: 100px;
+}
+.control-error {
+  &.invalid {
+    color: var(--color-error);
+    input {
+      border:focus {
+        border: 1px solod var(--color-error);
+      }
+    }
+  }
+
+  .validation {
+    color: var(--color-error);
+  }
+}
+.btn-light {
+  color: var(--color-text);
+}
+.btn-close {
+  margin-left: calc(100% - 20px);
+}
+.form-control[readonly] {
+  background-color: #ffffff;
+}

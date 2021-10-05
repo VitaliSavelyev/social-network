@@ -1,0 +1,9 @@
+<router-outlet></router-outlet>
+<select
+  (change)="changeLocale()"
+  [(ngModel)]="selectedLanguage"
+  style="position: absolute; top: 10px"
+  class="form-select form-select-sm"
+>
+  <option *ngFor="let language of languages" [value]="language.id">{{ language.title }}</option>
+</select>

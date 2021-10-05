@@ -1,0 +1,20 @@
+<div class="card mb-3 m-auto" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://cache3.youla.io/files/images/780_780/5c/bf/5cbf479502a55895072abe05.jpg" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{user.name}} {{user.surname}}</h5>
+        <p class="card-text">{{user.city}}</p>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            [routerLink]="['/user', user.id ]"
+          >About more...</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

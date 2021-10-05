@@ -1,0 +1,23 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--color-text);
+}
+.control-error {
+  &.invalid {
+    color: var(--color-error);
+    input {
+      border:focus {
+      border: 1px solod var(--color-error);
+      }
+    }
+  }
+
+  .validation {
+    color: var(--color-error);
+  }
+}
+.btn-light {
+  color: var(--color-text);
+}
+

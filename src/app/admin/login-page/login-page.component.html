@@ -1,0 +1,36 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="mb-3"><h4>{{'LANGUAGES.LOGIN_TITLE' | translate}}</h4></div>
+  <div
+    class="mb-3 control-error"
+  >
+    <label for="email" class="form-label">{{'LANGUAGES.EMAIL' | translate}}</label>
+    <input
+      [class.is-invalid]="_email.invalid && _email.touched"
+      type="email"
+      class="form-control"
+      id="email"
+      formControlName="email"
+    >
+    <div
+      class="invalid-feedback">
+      <small *ngIf="_email.hasError('required')">{{'LANGUAGES.LOGIN_ERR1' | translate}}</small>
+      <small *ngIf="_email.hasError('email')">{{'LANGUAGES.LOGIN_ERR2' | translate}}</small>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">{{'LANGUAGES.PASSWORD' | translate}}</label>
+    <input [class.is-invalid]="_password.invalid && _password.touched"
+           type="password"
+           class="form-control"
+           id="password"
+           formControlName="password"
+    >
+    <div class="invalid-feedback">
+      <small *ngIf="_password.hasError('required')">{{'LANGUAGES.PASSWORD_ERR' | translate}}</small>
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-light"
+    [disabled]="form.invalid || submitted">{{'LANGUAGES.ENTER' | translate}}</button>
+</form>

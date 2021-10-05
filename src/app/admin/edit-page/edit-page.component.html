@@ -1,0 +1,182 @@
+<form *ngIf="imgSRC" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="mb-3"><h4>{{'LANGUAGES.EDIT_TITLE' | translate}}</h4></div>
+  <div
+    class="mb-3 input-group"
+  >
+    <label for="name" class="input-group-text">{{'LANGUAGES.NAME' | translate}}</label>
+    <input
+      [class.is-invalid]="_name.invalid && _name.touched"
+      type="text"
+      class="form-control"
+      id="name"
+      formControlName="name"
+    >
+    <div
+      class="invalid-feedback">
+      <small *ngIf="_name.hasError('required')">{{'LANGUAGES.NAME_ERR' | translate}}</small>
+    </div>
+  </div>
+  <div class="mb-3 input-group">
+    <label for="surname" class="input-group-text">{{'LANGUAGES.SURNAME' | translate}}</label>
+    <input [class.is-invalid]="_surname.invalid && _surname.touched"
+           type="text"
+           class="form-control"
+           id="surname"
+           formControlName="surname"
+    >
+    <div class="invalid-feedback">
+      <small *ngIf="_surname.hasError('required')">{{'LANGUAGES.SURNAME_ERR' | translate}}</small>
+    </div>
+  </div>
+  <div class="mb-3 input-group">
+    <label for="birthday" class="input-group-text">{{'LANGUAGES.BIRTHDAY' | translate}}</label>
+    <input type="text"
+           formControlName="birthday"
+           [class.is-invalid]="_birthday.invalid && _birthday.touched"
+           id="birthday"
+           class="form-control"
+           placeholder="{{'LANGUAGES.BIRTHDAY_PLACEHOLDER' | translate}}"
+           bsDatepicker
+           [(bsValue)]="dateBth" value ="{{ dateBth | date }}"
+    >
+    <div class="invalid-feedback">
+      <small *ngIf="_birthday.hasError('required')">{{'LANGUAGES.BIRTHDAY_ERR1' | translate}}</small>
+    </div>
+    <div class="invalid-feedback">
+      <small *ngIf="_birthday.hasError('ageControl')">{{'LANGUAGES.BIRTHDAY_ERR2' | translate}}</small>
+    </div>
+  </div>
+  <div class="mb-3 input-group">
+    <h5>{{'LANGUAGES.ADDRESS' | translate}}</h5>
+    <div class="mb-3 input-group">
+      <label for="country" class="input-group-text">{{'LANGUAGES.COUNTRY' | translate}}</label>
+      <select
+        class="form-select"
+        id="country"
+        formControlName="country"
+      >
+        <option value="by">{{'LANGUAGES.COUNTRY1' | translate}}</option>
+        <option value="ru">{{'LANGUAGES.COUNTRY2' | translate}}</option>
+        <option value="ua">{{'LANGUAGES.COUNTRY3' | translate}}</option>
+      </select>
+    </div>
+    <div class="mb-3 input-group">
+      <label for="city" class="input-group-text">{{'LANGUAGES.CITY' | translate}}</label>
+      <input [class.is-invalid]="_city.invalid && _city.touched"
+             type="text"
+             class="form-control"
+             id="city"
+             formControlName="city"
+      >
+      <div class="invalid-feedback">
+        <small *ngIf="_city.hasError('required')">{{'LANGUAGES.CITY_ERR' | translate}}</small>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3 input-group">
+    <h5>{{'LANGUAGES.EDUCATIONS' | translate}}</h5>
+    <div
+      class="mb3 input-group"
+      formArrayName="educations"
+    >
+      <div class="mb-3 input-group" *ngFor="let education of _educations.controls; index as idx" >
+        <div
+          class="mb-3 input-group"
+          [formGroupName]="idx"
+        >
+          <button type="button" class="btn-close" aria-label="Close" (click)="deleteEdu(idx)"></button>
+          <div class="mb-3 input-group" [class.is-invalid]="education.hasError('eduControl')">
+            <label for="educationTitle" class="input-group-text">{{'LANGUAGES.EDUCATION_TITLE' | translate}} {{idx+1}}</label>
+            <input type="text"
+                   [class.is-invalid]="education.get('educationTitle')?.invalid && education.get('educationTitle')?.touched"
+                   formControlName="educationTitle"
+                   class="form-control"
+                   id="educationTitle"
+            >
+            <div class="invalid-feedback">
+              <small>{{'LANGUAGES.EDUCATION_TITLE_ERR' | translate}}</small>
+            </div>
+          </div>
+          <div class="mb-3 input-group">
+            <div class="row w-100 m-auto">
+              <div class="col-xs-12 col-md-6 form-group">
+                <input type="text"
+                       [class.is-invalid]="education.get('dateEntry')?.invalid && education.get('dateEntry')?.touched"
+                       formControlName="dateEntry"
+                       class="form-control"
+                       placeholder="{{'LANGUAGES.EDUCATION_ENTRY' | translate}}"
+                       bsDatepicker
+                       [(bsValue)]="dateEntry"
+                       value ="{{ dateEntry | date }}"
+                >
+                <div class="invalid-feedback">
+                  <small >{{'LANGUAGES.EDUCATION_ENTRY_ERR' | translate}}</small>
+                </div>
+              </div>
+              <div class="col-xs-12 col-12 col-md-6 form-group">
+                <input type="text"
+                       [class.is-invalid]="education.get('dateEnd')?.invalid && education.get('dateEnd')?.touched"
+                       formControlName="dateEnd"
+                       class="form-control"
+                       placeholder="{{'LANGUAGES.EDUCATION_END' | translate}}"
+                       bsDatepicker
+                       [(bsValue)]="dateEnd"
+                       value ="{{ dateEnd | date }}"
+                >
+                <div class="invalid-feedback">
+                  <small>{{'LANGUAGES.EDUCATION_END_ERR' | translate}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            <small *ngIf="education.hasError('eduControl')">{{'LANGUAGES.EDUCATION_DATE_ERR' | translate}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="addEdu()"
+    >{{'LANGUAGES.EDUCATION_ADD' | translate}}</button>
+  </div>
+  <div class="mb-3">
+    <h5>{{'LANGUAGES.PHOTO' | translate}}</h5>
+    <img src="{{imgSRC}}" class="img-fluid rounded-start" alt="...">
+    <div
+      class="mb-3 input-group"
+    ><label for="formFile" class="input-group-text">{{'LANGUAGES.PHOTO_ADD' | translate}}
+      <input
+        style='width:0px'
+        [class.is-invalid]="_avatar.invalid && _avatar.touched"
+        formControlName="avatar"
+        type="file"
+        id="formFile"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+      >
+    </label>
+      <input type="text"
+             class="form-control"
+             placeholder="{{nameFile}}"
+      >
+    </div>
+  </div>
+  <div class="mb-3 input-group">
+    <label for="about" class="input-group-text">{{'LANGUAGES.CREATE_ABOUT' | translate}}</label>
+    <input [class.is-invalid]="_about.invalid && _about.touched"
+           type="text"
+           class="form-control"
+           id="about"
+           formControlName="about"
+    >
+    <div class="invalid-feedback">
+      <small *ngIf="_surname.hasError('required')">{{'LANGUAGES.CREATE_ABOUT_ERR' | translate}}</small>
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-light"
+    [disabled]="form.invalid">{{'LANGUAGES.EDIT_ADD' | translate}}</button>
+</form>

@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="input-group mb-3">
+    <span class="input-group-text">{{'LANGUAGES.SEARCH' | translate}}</span>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="{{'LANGUAGES.SEARCH_PLACEHOLDER' | translate}}"
+      [(ngModel)]="searchUser"
+    >
+  </div>
+    <div *ngFor="let user of users| SearchPipe:searchUser">
+      <div class="card mb-3 m-auto" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <img src="{{user.avatar}}" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{user.name}} {{user.surname}}</h5>
+              <p class="card-text">{{user.city}}</p>
+              <div class="d-grid col-6 mx-auto">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  [routerLink] = "['/admin', 'users', user.id, 'edit']"
+                >{{'LANGUAGES.EDIT' | translate}}</button>
+              </div>
+              <div class="d-grid col-6 mx-auto">
+                <button
+                  (click)="openConfirmationDialog(user.id!)"
+                  type="button"
+                  class="btn btn-primary"
+                >{{'LANGUAGES.REMOVE' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

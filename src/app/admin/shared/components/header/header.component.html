@@ -1,0 +1,26 @@
+<div class="container d-flex justify-content-between p-2">
+  <a
+    class="nav-link link-head"
+    aria-current="page"
+    routerLink="/"
+  >{{'LANGUAGES.TITLE' | translate}}</a>
+  <ul
+    class="nav justify-content-end"
+    *ngIf="auth.isAuthenticated()"
+  >
+    <li class="nav-item" routerLinkActive="active">
+      <a
+        class="nav-link"
+        aria-current="page"
+        href="#"
+        [routerLink]="['/admin', 'users']"
+      >{{'LANGUAGES.USERS' | translate}}</a>
+    </li>
+    <li class="nav-item" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="['/admin', 'create']">{{'LANGUAGES.CREATE' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="#" (click)="logout($event)">{{'LANGUAGES.LOGOUT' | translate}}</a>
+    </li>
+  </ul>
+</div>
